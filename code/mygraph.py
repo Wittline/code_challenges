@@ -81,6 +81,96 @@ class myGraph:
         return paths
 
 
+    def vertex_degree(self, vertex):
+
+        degree = len(self._graph_dict[vertex])
+
+        for vertex in self._graph_dict[vertex]:
+            degree += 1
+        
+        return degree
+
+    
+    def get_isolated_vertices(self):
+
+        isolated = []
+
+        for vertex in self._graph_dict:
+            if not self._graph_dict[vertex]:
+                isolated += [vertex]
+
+        return isolated
+    
+    
+    def BFS(self, vertex):
+
+        visited = {k:False for k in self._graph_dict}
+        queue = []
+
+        queue.append(vertex)
+        visited[vertex] = True
+
+        while queue:
+            vertex = queue.pop(0)
+            print(vertex, end = "")
+
+            for vertex_connected in self._graph_dict[vertex]:
+                if visited[vertex_connected] == False:
+                    visited[vertex_connected] = True
+                    queue.append(vertex_connected)
+
+
+    def __dfs_run(self, vertex, visited):
+        visited[vertex] = True
+        print(vertex, end=' ')
+
+        for vertex_connected in self._graph_dict[vertex]:
+            if visited[vertex_connected] == False:
+                self.__dfs_run(vertex_connected, visited)
+                
+    
+    def DFS(self, vertex):
+        visited = {k:False for k in self._graph_dict}
+
+        self.__dfs_run(vertex, visited)
+
+    
+    def __dfs_run_2(self, vertex, visited_departure, time):
+
+        visited_departure[vertex][0] = True
+
+        for v in self._graph_dict[vertex]:
+            if visited_departure[v][0] == False:
+                time = self.__dfs_run_2(v, visited_departure, time)
+        
+        visited_departure[vertex][1] = time
+        time = time + 1
+
+        return  time
+
+    
+    def isDag(self):
+
+        visited_departure = {k:[False,None] for k in self._graph_dict}
+
+        time = 0
+
+        for vertex in self._graph_dict:
+            if not visited_departure[vertex][0]:
+                time = self.__dfs_run_2(vertex, visited_departure, time)
+
+        for vertex in self._graph_dict:
+            for vertex_connected in self._graph_dict[vertex]:
+
+                if visited_departure[vertex][1] <= visited_departure[vertex_connected][1]:
+                    return False
+
+        return True
+
+
+
+
+
 
 
 
