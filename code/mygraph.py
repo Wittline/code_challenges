@@ -202,14 +202,13 @@ class myGraph:
                     return True
             elif vertex != parent:
                 return True
-            
+                                            
         return False
 
     
     def has_cycle(self):
 
         visited = {k:False for k in self._graph_dict}
-
         return self.__dfs_cycle("a", visited)
 
 
