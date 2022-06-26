@@ -1,3 +1,5 @@
+from trie import Trie
+
 ##Find all occurrences of the given string in a character matrix
 #Given an M × N matrix of characters, find all occurrences of a given string in the matrix. We are allowed to search the string in all eight possible directions, i.e., North, West, South, East, North-East, North-West, South-East, South-West. Note that there should not be any cycles in the output path.
 
@@ -40,6 +42,55 @@ def findAllOccurences(mat, word):
     for i in range(len(mat)):
         for j in range(len(mat[0])):
             DFS(mat, word, i, j)
+
+
+# Generate a list of possible words from a character matrix
+# Given an M × N boggle board, find a list of all possible words that can be formed by a sequence of adjacent characters on the board. 
+# 
+
+def isValidCoordinate2(mat, x, y, path, key):
+    return (0 <= x < len(mat)) and (0 <= y < len(mat[0])) and \
+        (x, y) not in path and mat[x][y] == key
+
+def searchBoggleDFS(mat, i, j, result, ch, root, path = []):
+        
+
+    if root.isLeaf:
+        result.add(ch)
+
+    path.append((i,j))
+
+    for key, value in root.children.items():
+        for dir in directions.keys():
+            if isValidCoordinate2(mat, i + directions[dir][0], j + directions[dir][1], path, key):
+                searchBoggleDFS(mat, i + directions[dir][0], j + directions[dir][1], result, ch + key, value)
+                                
+    
+    path.pop()
+
+
+
+def searchInBoggle(mat, words):
+
+    if not mat or not len(mat) or not len(words):
+        return
+
+    result = set()
+
+    root = Trie()
+    for word in words:
+        root.insert(word)  
+ 
+    
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            ch = mat[i][j]
+
+            if root.startWith(ch):              
+                searchBoggleDFS(mat, i, j, result, ch, root.root.children[ch])
+
+    print(result)
+
 
 
      
