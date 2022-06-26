@@ -1,8 +1,5 @@
 
-from re import M
-
-
-def binary_search(words, low, high, word):
+def binary_search_word(words, low, high, word):
 
     if high >= low:
 
@@ -11,11 +8,32 @@ def binary_search(words, low, high, word):
         if words[m] == word:
             return m
         elif words[m] > word:
-            return binary_search(words, low, m -1, word)
+            return binary_search_word(words, low, m -1, word)
         else:
-            return binary_search(words, m+1, high, word)
+            return binary_search_word(words, m+1, high, word)
     else:
         return -1
+
+
+def binary_search_max_word_unsorted(words, low, high):
+    max = 0
+    if low == high:
+        max = words[low]
+    elif low + 1 == high:
+        if words[low] < words[high]:
+            max = words[high]
+        else:
+            max = words[low]
+    else:
+        mid = low + (high - low) // 2
+        lmax = binary_search_max_word_unsorted(words, low, mid)
+        hmax = binary_search_max_word_unsorted(words, mid + 1, high)
+        if lmax > hmax:
+            max = lmax
+        else:
+            max = hmax
+
+    return max
 
 
 
@@ -30,13 +48,22 @@ words = [
 ]
 
 word = 'means'
+ 
+result = binary_search_max_word_unsorted(words, 0, len(words)-1)
+
+if result != -1:
+    print("Max Word is:", str(result))
+else:
+    print("Word is not present in words") 
+
 
 words.sort()
- 
 
-result = binary_search(words, 0, len(words)-1, word)
+result = binary_search_word(words, 0, len(words)-1, word)
  
 if result != -1:
     print("Word is present in words at index", str(result))
 else:
     print("Word is not present in words")
+
+
