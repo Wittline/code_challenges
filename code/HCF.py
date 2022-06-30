@@ -1,5 +1,3 @@
-from cgitb import small
-
 
 def HCF(n1, n2):
     
