@@ -1,3 +1,8 @@
+# Tree edge (u, v): departure[u] > departure[v]
+# Back edge (u, v): departure[u] < departure[v]
+# Forward edge (u, v): departure[u] > departure[v]
+# Cross edge (u, v): departure[u] > departure[v]
+
 def __dfs_run_2(self, vertex, visited_departure, time):
 
     visited_departure[vertex][0] = True
