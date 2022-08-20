@@ -22,6 +22,7 @@ def SetZeroes(mat):
     for r in range(1, M):
         if mat[r][0] == 0:
             for c in range(1, N):
+                
                 mat[r][c] = 0
 
     for c in range(1, N):
