@@ -14,8 +14,9 @@ def isSubsequence(word, s):
 words = []
 s = ""
 count = 0
+
 def count_words_subsequence(words, s):
-    
+
     for word in words:
         if isSubsequence(word, s):
             count += 1
