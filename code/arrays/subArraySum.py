@@ -1,0 +1,2 @@
+def subArraySum(nums, k):
+    
