@@ -24,24 +24,16 @@ print(longest('10110110011110'))
 
 
 def longest_ones(s):
-
   lon_sequence = 0
-  
-
   cur_sequence = 0
-  
 
   for ch in s:
-
     if ch == '1':
       cur_sequence += 1
-
     else:
-
       if cur_sequence > lon_sequence:
         lon_sequence = cur_sequence
       cur_sequence = 0
-
   return lon_sequence
 
 print(longest_ones("11011101"))
