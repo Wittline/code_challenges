@@ -20,5 +20,4 @@ def longest(s):
                 
     return longest_s * '1'
 
-
 print(longest('10110110011110'))
