@@ -1,2 +1,2 @@
-# Algorithms
-Different algorithms for different purposes
+# code challenges
+code challenges
