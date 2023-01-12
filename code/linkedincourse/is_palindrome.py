@@ -8,4 +8,3 @@ def is_palindrome(s):
 
 
 print(is_palindrome('lev el isi level'))
-
